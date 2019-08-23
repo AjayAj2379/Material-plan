@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
 
 plannedItem : PlannedDetails[] =[];
 actualItem : ActualDetails[]=[];
+section : string;
 
   constructor() { }
 

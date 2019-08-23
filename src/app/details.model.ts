@@ -1,9 +1,9 @@
 export class PlannedDetails {
-    length : string;
-    qty : string
+    length : number;
+    qty : number;
 }
 
 export class ActualDetails{
-    length : string;
-    qty : string
+    length : number;
+    qty : number
 }
