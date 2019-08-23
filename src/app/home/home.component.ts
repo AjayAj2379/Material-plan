@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PlannedDetails} from '../details.model'
+import {PlannedDetails, ActualDetails} from '../details.model'
 declare var $: any;
 
 @Component({
@@ -10,6 +10,7 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
 plannedItem : PlannedDetails[] =[];
+actualItem : ActualDetails[]=[];
 
   constructor() { }
 
@@ -40,6 +41,8 @@ plannedItem : PlannedDetails[] =[];
                       </div>`
       var planLen=[];
       var planQty=[];
+      var actLen=[];
+      var actQty=[];
 
         // Dynamically add the length and quantity field        
 
@@ -83,16 +86,29 @@ plannedItem : PlannedDetails[] =[];
        $(document).on('click','#submit',function(){
         var length= $(".planLen");
         var quantity = $(".planQty");
+        var actualLength = $(".ActplanLen");
+        var actualQuantity = $(".ActplanQty");
+
         $.each(length,function(i,ele){
          planLen.push(length[i].value)
         });
+
         $.each(quantity,function(i,ele){
           planQty.push(quantity[i].value)
          });
+
+         $.each(actualLength,function(i,ele){
+          actLen.push(actualLength[i].value)
+         });
+
+         $.each(actualQuantity,function(i,ele){
+          actQty.push(actualQuantity[i].value)
+         });
+ 
           
          console.log(planLen.length)
-         refer.getPlannedItemd(planLen,planQty,planLen.length)
-         
+         refer.getPlannedItems(planLen,planQty,planLen.length)
+         refer.getActualItems(actLen,actQty,actLen.length)
 
         });
 
@@ -101,7 +117,7 @@ plannedItem : PlannedDetails[] =[];
 
   }
 
-  getPlannedItemd(planLen,planQty,len)
+  getPlannedItems(planLen,planQty,len)
   {
     console.log(len)
 
@@ -114,5 +130,17 @@ plannedItem : PlannedDetails[] =[];
      console.log(this.plannedItem)
    
     
+  }
+
+  getActualItems(actLen,actQty,len)
+  {
+    this.actualItem=[];
+    for(let i=0;i<len;i++)
+    {
+      this.actualItem.push({"length":actLen[i],"qty":actQty[i]})
+     
+    }
+    console.log(this.actualItem)
+   
   }
 }
