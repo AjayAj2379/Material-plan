@@ -30,7 +30,7 @@ plannedItem : PlannedDetails[] =[];
                   </div>`;
       var actualAdd =`<div class="row act-add-item">
                     <div class="form-group form-inline">
-                    <label for="ActplanLen" class="mr-5"><b>Length</b></label>
+                    <label for="ActplanLen" class="mr-3"><b>Length</b></label>
                     <input type="text" name="ActplanLen" id="" class="form-control col-md-2 mr-4 ActplanLen">
                     <label for="ActplanQty" class="mr-3"><b>Quantity</b></label>
                     <input type="text" name="ActplanQty" id="" class="form-control col-md-2 mr-2 ActplanQty">
