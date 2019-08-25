@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.inputNum.remove-arrow::-webkit-inner-spin-button,
+.inputNum.remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

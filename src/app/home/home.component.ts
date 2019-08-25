@@ -20,12 +20,21 @@ section : string;
     let refer = this;
     $(document).ready (function(){
 
+
+      // $(document).load(function(){
+
+      //   console.log("aja")
+      // });
+
+     
+
+
       var add= ` <div class="row add-item">
               <div class="form-group form-inline">
               <label for="planLen" class="mr-5"><b>Length</b></label>
-              <input type="text" name="planLen" id="" class="form-control col-md-2 mr-4 planLen">
+              <input type="number" name="planLen" id="" class="form-control col-md-2 mr-4 planLen inputNum">
               <label for="planQty" class="mr-3"><b>Quantity</b></label>
-              <input type="text" name="planQty" id="" class="form-control col-md-2 mr-2 planQty">
+              <input type="number" name="planQty" id="" class="form-control col-md-2 mr-2 planQty inputNum">
               <button class="btn btn-info mr-2"   type="button" id="remove"><b>-</b></button>
               <button class="btn btn-info"  type="button" id="addbutton"><b>+</b></button>
               </div>
@@ -33,9 +42,9 @@ section : string;
       var actualAdd =`<div class="row act-add-item">
                     <div class="form-group form-inline">
                     <label for="ActplanLen" class="mr-3"><b>Length</b></label>
-                    <input type="text" name="ActplanLen" id="" class="form-control col-md-2 mr-4 ActplanLen">
+                    <input type="number" name="ActplanLen" id="" class="form-control col-md-2 mr-4 ActplanLen inputNum">
                     <label for="ActplanQty" class="mr-3"><b>Quantity</b></label>
-                    <input type="text" name="ActplanQty" id="" class="form-control col-md-2 mr-2 ActplanQty">
+                    <input type="number" name="ActplanQty" id="" class="form-control col-md-2 mr-2 ActplanQty inputNum">
                     <button class="btn btn-dark mr-2"  type="button" id="actremove"><b>-</b></button>
                     <button class="btn btn-dark"  type="button" id="actaddbutton"><b>+</b></button>
                     </div>
@@ -45,16 +54,22 @@ section : string;
       var actLen=[];
       var actQty=[];
 
+    
+
         // Dynamically add the length and quantity field        
 
       $("#add").click(function(){
 
-        $(".lenQty").append(add)
+        $(".lenQty").append(add);
+      
+        $(".inputNum").addClass("remove-arrow")
+
       });
 
       $("#actadd").click(function(){
 
-        $(".actLenQty").append(actualAdd)
+        $(".actLenQty").append(actualAdd);
+         $(".inputNum").addClass("remove-arrow")
       });
 
 
@@ -76,10 +91,15 @@ section : string;
        $(document).on('click','#addbutton',function(){
     
         $(".lenQty").append(add);
+        $(".inputNum").addClass("remove-arrow");
+      
+     
+        
        });
        $(document).on('click','#actaddbutton',function(){
     
-        $(".actLenQty").append(actualAdd)
+        $(".actLenQty").append(actualAdd);
+        $(".inputNum").addClass("remove-arrow")
        });
 
        // on submit transfer the values
