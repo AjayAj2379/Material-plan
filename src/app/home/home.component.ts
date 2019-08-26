@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PlannedDetails, ActualDetails} from '../details.model'
+import {PlannedDetails, ActualDetails, CombinedDetails, InsertItem} from '../details.model';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {NgForm} from '@angular/forms'
 declare var $: any;
 
 @Component({
@@ -11,23 +13,26 @@ export class HomeComponent implements OnInit {
 
 plannedItem : PlannedDetails[] =[];
 actualItem : ActualDetails[]=[];
+plannedSize: number;
+actualSize:number;
 section : string;
+plan: string='';
+buttonActivate=true;
 
-  constructor() { }
+combinedItem : CombinedDetails[]=[];
+finalItem : InsertItem;
+
+  constructor(private fireStore : AngularFirestore) { 
+    
+  
+  }
 
   ngOnInit() {
-    
+   
+  this.resetForm()
     let refer = this;
     $(document).ready (function(){
-
-
-      // $(document).load(function(){
-
-      //   console.log("aja")
-      // });
-
-     
-
+      var len,qty,actLen,actQty;
 
       var add= ` <div class="row add-item">
               <div class="form-group form-inline">
@@ -49,10 +54,7 @@ section : string;
                     <button class="btn btn-dark"  type="button" id="actaddbutton"><b>+</b></button>
                     </div>
                       </div>`
-      var planLen=[];
-      var planQty=[];
-      var actLen=[];
-      var actQty=[];
+      
 
     
 
@@ -101,15 +103,38 @@ section : string;
         $(".actLenQty").append(actualAdd);
         $(".inputNum").addClass("remove-arrow")
        });
+       //
+    
+     $("#planLen,#planQty,#ActplanLen,#ActplanQty").on('input',function(){
+
+    len= $("#planLen").val();
+     qty= $("#planQty").val();
+     actLen= $("#ActplanLen").val();
+     actQty= $("#ActplanQty").val()
+
+     if(len==''|| qty==''||actLen==''||actQty=='')
+     {
+          refer.buttonActivate=true;
+     }
+     else{
+       refer.buttonActivate=false;
+     }
+     })
+     
+     
 
        // on submit transfer the values
 
        $(document).on('click','#submit',function(){
+        
         var length= $(".planLen");
         var quantity = $(".planQty");
         var actualLength = $(".ActplanLen");
         var actualQuantity = $(".ActplanQty");
-
+        var planLen=[];
+        var planQty=[];
+        var actLen=[];
+        var actQty=[];
         $.each(length,function(i,ele){
          planLen.push(length[i].value)
         });
@@ -127,41 +152,146 @@ section : string;
          });
  
           
-         console.log(planLen.length)
+        // console.log(planLen.length)
          refer.getPlannedItems(planLen,planQty,planLen.length)
          refer.getActualItems(actLen,actQty,actLen.length)
+        
 
         });
 
-     
+      
     });
 
   }
 
-  getPlannedItems(planLen,planQty,len)
-  {
-    console.log(len)
+  resetForm(form?: NgForm){
+if(form != null)
+    form.resetForm();
+    this.finalItem = {
+     plan:'',
+     items:'',
+     section:''
 
-    this.plannedItem=[];
+    }
+  }
+
+  getPlannedItems(planLen:number[],planQty:number[],len:number)
+  {
+    //console.log(len)
+
+   this.plannedItem=[];  
      for(let i=0;i<len;i++)
      {
-       this.plannedItem.push({"length":planLen[i],"qty":planQty[i]})
+       this.plannedItem.push({"length":Number(planLen[i]),"qty":Number(planQty[i])})
       
      }
+     //console.log(this.plannedItem)
+     for (let i=0;i<len;i++) {
+       for (let j=i+1;j<len;j++) {
+         if (this.plannedItem[i].length == this.plannedItem[j].length) {
+          this.plannedItem[i].qty = this.plannedItem[i].qty + this.plannedItem[j].qty;
+          this.plannedItem.splice(j, 1);
+          len--;
+         }
+       }
+     }
+     this.plannedSize=this.plannedItem.length;
+     this.plannedItem.sort(function(a,b){return a.length-b.length});
+    
      console.log(this.plannedItem)
+     console.log(this.plannedSize)
    
     
   }
 
-  getActualItems(actLen,actQty,len)
+  getActualItems(actLen:number[],actQty:number[],len:number)
   {
     this.actualItem=[];
     for(let i=0;i<len;i++)
     {
-      this.actualItem.push({"length":actLen[i],"qty":actQty[i]})
+      this.actualItem.push({"length":Number(actLen[i]),"qty":Number(actQty[i])})
      
     }
+    for (let i=0;i<len;i++) {
+      for (let j=i+1;j<len;j++) {
+        if (this.actualItem[i].length == this.actualItem[j].length) {
+         this.actualItem[i].qty = this.actualItem[i].qty + this.actualItem[j].qty;
+         this.actualItem.splice(j, 1);
+         len--;
+        }
+      }
+    }
+   
+    this.actualSize=this.actualItem.length;
+    this.actualItem.sort(function(a,b){return a.length-b.length});
     console.log(this.actualItem)
+    console.log(this.actualSize)
+     this.formCombinedItem();
    
   }
+
+
+  formCombinedItem()
+  {
+   for(let i=0;i<this.actualSize;i++)
+   {
+     let isPresent =false;
+     for(let j=0;j<this.plannedSize;j++)
+     {
+       if(this.actualItem[i].length===this.plannedItem[j].length)
+       {
+         this.combinedItem.push({"length":Number(this.actualItem[i].length),
+                                "actQty":Number(this.actualItem[i].qty),
+                                "planQty":Number(this.plannedItem[j].qty)});
+          
+          isPresent=true;
+          break;
+       }
+      
+     }
+     if(isPresent==false)
+     {
+      this.combinedItem.push({"length":Number(this.actualItem[i].length),
+                            "actQty":Number(this.actualItem[i].qty),
+                            "planQty":Number(0)});
+     }
+   }
+  // console.log(this.combinedItem)
+
+   for(let i=0;i<this.plannedSize;i++)
+   {
+     let isPresent =false;
+     for(let j=0;j<this.actualSize;j++)
+     {
+       if(this.plannedItem[i].length===this.actualItem[j].length)
+       {
+          
+          isPresent=true;
+       }
+      
+     }
+     if(isPresent==false)
+     {
+      this.combinedItem.push({"length":Number(this.plannedItem[i].length),
+                            "actQty":Number(0),
+                            "planQty":Number(this.plannedItem[i].qty)});
+     }
+   }
+   this.combinedItem.sort(function(a,b){return a.length-b.length});
+   
+   this.addItem();
+
+  }
+
+  addItem()
+  {
+    console.log("added",this.plan)
+    this.finalItem.plan= this.plan;
+    this.finalItem.section=this.section;
+    this.finalItem.items=this.combinedItem;
+    console.log(this.finalItem)
+    // this.fireStore.collection('details').add(this.finalItem)
+  }
 }
+
+

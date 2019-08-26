@@ -1,6 +1,14 @@
 <br><div class="container">
+        <div class="text-center form-group" style="color: red">
+                   
+                <b><i>* represents Mandatory field</i></b>
+            
+        </div>
    <div class="jumbotron">
-       <form id="form">
+       
+       <form id="form" #form="ngForm">
+          
+               
         <div class="row">
             <div class="col-md-6">
                 <!-- <div class="jumbotron" style="background-color:#9ab7b7"> -->
@@ -8,26 +16,33 @@
 
                     <div class="row ">
                         <div class="form-group form-inline">
-                            <label for="planName" class="mr-4"><b>Plan Name</b></label>
-                            <input type="text" name="planName" id="planName" class="form-control">
+                            <label for="planName" class="mr-4"><b>Plan Name<span style="color: red">*</span></b></label>
+                            <input type="text" name="planName" id="planName" [(ngModel)]="plan" class="form-control" required >
                         </div>
-                    
-                       
                     </div>
+                     
+                    <!-- <div class="row" *ngIf="isPlanNull" class="error">
+                        <div class="col-md-4 offset-md-2 form-group" style="color: red">
+                                Field is required 
+                        </div>
+                       
+                    </div> -->
+        
+                    
                     <div class="row ">
                             <div class="form-group form-inline">
-                                <label for="section" class="mr-5"><b>Section</b></label>
-                                <input type="text" name="section" id="section" class="form-control" [(ngModel)]="section">
+                                <label for="section" class="mr-5"><b>Section<span style="color: red">*</span></b></label>
+                                <input type="text" name="section" id="section" class="form-control" [(ngModel)]="section" required>
                             </div>
             
                     </div>
                     <div class="lenQty form-group">
                             <div class="row ">
                                     <div class="form-group form-inline">
-                                        <label for="planLen" class="mr-5"><b>Length</b></label>
-                                        <input type="number" name="planLen" id="" class="form-control col-md-2 mr-4 planLen">
-                                        <label for="planQty" class="mr-3"><b>Quantity</b></label>
-                                        <input type="number" name="planQty" id="" class="form-control col-md-2 mr-2 planQty">
+                                        <label for="planLen" class="mr-5"><b>Length<span style="color: red">*</span></b></label>
+                                        <input type="number" name="planLen" id="planLen" class="form-control col-md-2 mr-4 planLen" >
+                                        <label for="planQty" class="mr-3"><b>Quantity<span style="color: red">*</span></b></label>
+                                        <input type="number" name="planQty" id="planQty"  class="form-control col-md-2 mr-2 planQty" >
                                         <button class="btn btn-info" type="button" id="add"><b>+</b></button>
                                     </div>
                             </div>
@@ -42,10 +57,10 @@
                 <div class="actLenQty form-group">
                         <div class="row">
                                 <div class="form-group form-inline">
-                                    <label for="ActplanLen" class="mr-3"><b>Length</b></label>
-                                    <input type="number" name="ActplanLen" id="" class="form-control col-md-2 mr-4 ActplanLen">
-                                    <label for="ActplanQty" class="mr-3"><b>Quantity</b></label>
-                                    <input type="number" name="ActplanQty" id="" class="form-control col-md-2 mr-2 ActplanQty">
+                                    <label for="ActplanLen" class="mr-3"><b>Length<span style="color: red">*</span></b></label>
+                                    <input type="number" name="ActplanLen" id="ActplanLen"   class="form-control col-md-2 mr-4 ActplanLen" > 
+                                    <label for="ActplanQty" class="mr-3"><b>Quantity<span style="color: red">*</span></b></label>
+                                    <input type="number" name="ActplanQty" id="ActplanQty"  class="form-control col-md-2 mr-2 ActplanQty" >
                                     <button class="btn btn-dark" type="button" id="actadd"><b>+</b></button>
                                 </div>
                         </div>
@@ -54,7 +69,7 @@
             </div>
         </div>
         <div class="text-center form-group">
-                <button class="btn btn-success mr-5" type="button" id="submit">Submit</button>
+                <button class="btn btn-success mr-5" [disabled]=" form.invalid || buttonActivate" type="button" id="submit">Submit</button>
                 <button class="btn btn-danger" type="reset" id="reset">Reset</button>
             </div>
       

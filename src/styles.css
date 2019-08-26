@@ -4,3 +4,8 @@
     -webkit-appearance: none;
     margin: 0;
 }
+
+input.ng-touched.ng-invalid {
+    border-color: red;
+
+}
