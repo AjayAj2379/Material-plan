@@ -6,7 +6,7 @@
         </div>
    <div class="jumbotron">
        
-       <form id="form" #form="ngForm">
+       <form id="form" #form="ngForm" autocomplete="off" >
           
                
         <div class="row">
@@ -36,7 +36,7 @@
                             </div>
             
                     </div>
-                    <div class="lenQty form-group">
+                   <div class="plan-len-qty">
                             <div class="row ">
                                     <div class="form-group form-inline">
                                         <label for="planLen" class="mr-5"><b>Length<span style="color: red">*</span></b></label>
@@ -46,7 +46,10 @@
                                         <button class="btn btn-info" type="button" id="add"><b>+</b></button>
                                     </div>
                             </div>
-                     </div>
+                        </div>
+                            <div class="lenQty form-group">
+
+                            </div>
                      
 
             <!-- </div> -->
@@ -54,7 +57,7 @@
             <div class="col-md-6">
                 <!-- <div class="jumbotron" style="background-color: coral"> -->
                 <h2><b>ACTUAL</b></h2><hr>
-                <div class="actLenQty form-group">
+                <div class="act-len-qty">
                         <div class="row">
                                 <div class="form-group form-inline">
                                     <label for="ActplanLen" class="mr-3"><b>Length<span style="color: red">*</span></b></label>
@@ -65,11 +68,12 @@
                                 </div>
                         </div>
                  </div>
+                 <div class="actLenQty form-group"></div>
                 <!-- </div> -->
             </div>
         </div>
         <div class="text-center form-group">
-                <button class="btn btn-success mr-5" [disabled]=" form.invalid || buttonActivate" type="button" id="submit">Submit</button>
+                <button class="btn btn-success mr-5" [disabled]=" form.invalid || buttonActivate" type="submit" id="submit">Submit</button>
                 <button class="btn btn-danger" type="reset" id="reset">Reset</button>
             </div>
       

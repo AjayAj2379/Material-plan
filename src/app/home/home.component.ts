@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {PlannedDetails, ActualDetails, CombinedDetails, InsertItem} from '../details.model';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {NgForm} from '@angular/forms'
+import {NgForm} from '@angular/forms';
+import Swal from 'sweetalert2'
 declare var $: any;
+
 
 @Component({
   selector: 'app-home',
@@ -17,23 +19,24 @@ plannedSize: number;
 actualSize:number;
 section : string;
 plan: string='';
-buttonActivate=true;
+buttonActivate= true;
+
 
 combinedItem : CombinedDetails[]=[];
 finalItem : InsertItem;
 
   constructor(private fireStore : AngularFirestore) { 
-    
-  
+ 
+ 
   }
 
   ngOnInit() {
-   
+  
   this.resetForm()
     let refer = this;
     $(document).ready (function(){
       var len,qty,actLen,actQty;
-
+        
       var add= ` <div class="row add-item">
               <div class="form-group form-inline">
               <label for="planLen" class="mr-5"><b>Length</b></label>
@@ -126,43 +129,90 @@ finalItem : InsertItem;
        // on submit transfer the values
 
        $(document).on('click','#submit',function(){
-        
-        var length= $(".planLen");
-        var quantity = $(".planQty");
-        var actualLength = $(".ActplanLen");
-        var actualQuantity = $(".ActplanQty");
-        var planLen=[];
-        var planQty=[];
-        var actLen=[];
-        var actQty=[];
-        $.each(length,function(i,ele){
-         planLen.push(length[i].value)
-        });
+        var confirm;
+        Swal.fire({
+          title:"Are you Sure you want to submit??",
+          text:"You cannot undo it",
+          type:"info",
+          showCancelButton:true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText:'No' }).then((result)=>{
 
-        $.each(quantity,function(i,ele){
-          planQty.push(quantity[i].value)
-         });
+            if(result.value)
+            {
+              confirm = true;
+              console.log(confirm);
+             
+              Swal.fire({
+                title:'Success',
+                text:'Your values are submitted',
+                type:"success",
+                timer:2000,
+                showConfirmButton:false
+              })
+              var length= $(".planLen");
+              var quantity = $(".planQty");
+              var actualLength = $(".ActplanLen");
+              var actualQuantity = $(".ActplanQty");
+              var planLen=[];
+              var planQty=[];
+              var actLen=[];
+              var actQty=[];
+              $.each(length,function(i,ele){
+               planLen.push(length[i].value)
+              });
+      
+              $.each(quantity,function(i,ele){
+                planQty.push(quantity[i].value)
+               });
+      
+               $.each(actualLength,function(i,ele){
+                actLen.push(actualLength[i].value)
+               });
+      
+               $.each(actualQuantity,function(i,ele){
+                actQty.push(actualQuantity[i].value)
+               });
+       
+                
+              // console.log(planLen.length)
+               refer.getPlannedItems(planLen,planQty,planLen.length)
+               refer.getActualItems(actLen,actQty,actLen.length)
+      
+               //remove dynamically created elements
+      
+               $(".lenQty").remove()
+               $(".actLenQty").remove()
+      
+               // reset the form after submit
+      
+                 $("#planLen").val('');
+                 $("#planQty").val('');
+                 $("#ActplanLen").val('');
+                 $("#ActplanQty").val('')
+                 $("#planName").val('');
+                 $("#section").val('');
+                 refer.buttonActivate=true;
 
-         $.each(actualLength,function(i,ele){
-          actLen.push(actualLength[i].value)
-         });
+                 // add the removed div
+      
+                 $(".plan-len-qty").after("<div class=\"lenQty form-group\"> </div>")
+                 $(".act-len-qty").after("<div class=\"actLenQty form-group\"> </div>")
+             
+            }
+            else{
 
-         $.each(actualQuantity,function(i,ele){
-          actQty.push(actualQuantity[i].value)
-         });
- 
-          
-        // console.log(planLen.length)
-         refer.getPlannedItems(planLen,planQty,planLen.length)
-         refer.getActualItems(actLen,actQty,actLen.length)
-        
-
+            }
+          });
+    
         });
 
       
     });
 
   }
+
 
   resetForm(form?: NgForm){
 if(form != null)
@@ -233,6 +283,7 @@ if(form != null)
 
   formCombinedItem()
   {
+    this.combinedItem=[];
    for(let i=0;i<this.actualSize;i++)
    {
      let isPresent =false;
@@ -290,8 +341,10 @@ if(form != null)
     this.finalItem.section=this.section;
     this.finalItem.items=this.combinedItem;
     console.log(this.finalItem)
-    // this.fireStore.collection('details').add(this.finalItem)
+    this.fireStore.collection('details').doc(this.plan).set(this.finalItem);
+    
   }
+ 
 }
 
 
