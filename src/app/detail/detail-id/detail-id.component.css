@@ -7,6 +7,6 @@ td{
     font-size: 18px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
- .borderless th {
+.borderless td {
     border: none;
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PlannedDetails, ActualDetails, CombinedDetails, InsertItem} from '../details.model';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {NgForm} from '@angular/forms';
+import {ServiceService} from '../service/service.service'
+import {NgForm, SelectControlValueAccessor} from '@angular/forms';
 import Swal from 'sweetalert2'
 declare var $: any;
 
@@ -20,12 +21,15 @@ actualSize:number;
 section : string;
 plan: string='';
 buttonActivate= true;
-
+planArray=[];
+jquery;
 
 combinedItem : CombinedDetails[]=[];
 finalItem : InsertItem;
-
-  constructor(private fireStore : AngularFirestore) { 
+  getItem: any;
+  idexist: boolean;
+  constructor(private fireStore : AngularFirestore,
+    private service : ServiceService) { 
  
  
   }
@@ -34,9 +38,12 @@ finalItem : InsertItem;
   
   this.resetForm()
     let refer = this;
+  
     $(document).ready (function(){
       var len,qty,actLen,actQty;
-        
+      
+     
+    
       var add= ` <div class="row add-item">
               <div class="form-group form-inline">
               <label for="planLen" class="mr-5"><b>Length</b></label>
@@ -130,6 +137,21 @@ finalItem : InsertItem;
 
        $(document).on('click','#submit',function(){
         var confirm;
+        
+       refer.checkIdExist();
+       setTimeout(()=>{
+        console.log(refer.idexist)
+        if(refer.idexist)
+        {
+      Swal.fire({
+                title:'Plan ID already exist',
+                text:'Please provide different name',
+                type:"error"
+              })
+      
+        }
+        else{
+          
         Swal.fire({
           title:"Are you Sure you want to submit??",
           text:"You cannot undo it",
@@ -143,14 +165,7 @@ finalItem : InsertItem;
             {
               confirm = true;
               console.log(confirm);
-             
-              Swal.fire({
-                title:'Success',
-                text:'Your values are submitted',
-                type:"success",
-                timer:2000,
-                showConfirmButton:false
-              })
+      
               var length= $(".planLen");
               var quantity = $(".planQty");
               var actualLength = $(".ActplanLen");
@@ -205,6 +220,13 @@ finalItem : InsertItem;
 
             }
           });
+
+        }
+
+       },100)
+          
+           
+      
     
         });
 
@@ -334,6 +356,48 @@ if(form != null)
 
   }
 
+
+ checkIdExist()
+{
+  this.service.getDetails().subscribe((data:any)=>{
+    this.planArray=[];
+    this.getItem = data.map(info =>{
+      
+      this.planArray.push(info.payload.doc.data().plan);
+      
+      return info.payload.doc.data();
+     
+    })
+    if(this.planArray.includes(this.plan))
+    {
+     this.setValue(true)
+ 
+
+    }
+    else{
+        this.setValue(false);
+    }
+
+   })
+
+  
+
+   //console.log(this.idexist)
+  
+}
+setValue(check)
+{
+
+  if(check)
+  {
+    this.idexist=true;
+  }
+  else {
+    this.idexist=false;
+  }
+ 
+}
+
   addItem()
   {
     console.log("added",this.plan)
@@ -341,7 +405,27 @@ if(form != null)
     this.finalItem.section=this.section;
     this.finalItem.items=this.combinedItem;
     console.log(this.finalItem)
-    this.fireStore.collection('details').doc(this.plan).set(this.finalItem);
+
+  
+    this.fireStore.collection('details').doc(this.plan).set(this.finalItem).then(() => {
+      Swal.fire({
+                title:'Success',
+                text:'Your values are Inserted',
+                type:"success",
+                timer:2000,
+                showConfirmButton:false
+              })
+
+    }).catch(() => {
+      Swal.fire({
+        title:'Offline!!',
+        text:'Check your Internet Connection',
+        type:"warning",
+        timer:5000,
+        showConfirmButton:false
+      })
+
+    });
     
   }
  

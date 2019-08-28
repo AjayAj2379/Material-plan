@@ -1,5 +1,47 @@
 <br><div class="container">
     <div class="jumbotron">
-        details works
+        <table class="table text-center table-hover borderless"  >
+           <thead class="thead-dark">
+               <tr>
+                   <th><b>S.No</b></th>
+                    <th><b>Plan No</b></th>
+                    <th><b>Section</b></th>
+                    <th><b>Action</b></th>
+               </tr>
+           </thead>
+           <br>
+           <tbody *ngIf="getItem!=0"  class="table-info">
+               <tr *ngFor="let item of getItem; let i=index" >
+                   <td><b>{{i+1}}</b></td>
+                   <td><b>{{item.plan}}</b></td>
+                   <td><b>{{item.section}}</b></td>
+                   <td><button class="btn btn-outline-info mr-3" routerLink="/detail/{{item.plan}}">Details</button>
+                    <button class="btn btn-outline-secondary mr-3">Edit</button>
+                    <button class="btn btn-outline-danger mr-3"(click)="deteleDetails(item.plan)">Delete</button></td>
+                    
+               </tr>
+  
+           </tbody>
+
+         
+           
+       
+        </table>
+         
+            <div *ngIf="getItem==0 && !loading" class="text-center">
+               <b>No records found</b>
+            </div>
+        <div *ngIf="loading" class="text-center">
+              
+            <img src="https://loading.io/spinners/balls/index.circle-slack-loading-icon.gif" 
+               
+                alt="Loading...."
+                class="rounded"
+                >
+                <b>Loading...</b>
+             </div>
+
+           
+             
     </div>
 </div>

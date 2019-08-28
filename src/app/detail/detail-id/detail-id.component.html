@@ -1,0 +1,58 @@
+<br><div class="container">
+    <div class="jumbotron">
+        <table class="table borderless">
+            <thead class="bg-light">
+                <tr>
+                    <th><b>Plan No</b></th>
+                    <th><b>Section</b></th>
+                    <th><b>Length</b></th>
+                    <th><b>Actual</b></th>
+                    <th><b>Planned</b></th>
+                </tr>
+                
+            </thead>
+            <br>
+            <tbody *ngIf="materialDetails!=0 " class="table-success">
+                
+                <tr>    
+                    <td><b><b>{{materialDetails.plan}}</b></b></td>
+                    <td><b>{{materialDetails.section}}</b></td>
+                    <td>
+                        <div *ngFor = "let info of materialDetails.items"><td><b>{{info.length}}</b></td></div>
+                    </td>
+
+                    <td>
+                            <div *ngFor = "let info of materialDetails.items"><td><b>{{info.actQty}}</b></td></div>
+                    </td>
+                    <td>
+                            <div *ngFor = "let info of materialDetails.items"><td><b>{{info.planQty}}</b></td></div>
+                    </td>
+                    
+                    
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="empty" class="text-center">
+                <b>No records found</b>
+             </div>
+
+
+
+        <div *ngIf="loading" class="text-center">
+              
+                <img src="https://loading.io/spinners/balls/index.circle-slack-loading-icon.gif" 
+                   
+                    alt="Loading...."
+                    class="rounded"
+                    >
+                    <b>Loading...</b> 
+                 </div>
+
+                 <div *ngIf="materialDetails!=0" class="text-center form-group">
+                        <button class="btn btn-info mr-5" >Edit</button>
+                        <button class="btn btn-danger" (click)="onDelete(materialDetails.plan)" >Delete</button>
+                    </div>
+              
+    </div>
+</div>
