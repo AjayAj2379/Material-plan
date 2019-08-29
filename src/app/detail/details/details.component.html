@@ -16,7 +16,7 @@
                    <td><b>{{item.plan}}</b></td>
                    <td><b>{{item.section}}</b></td>
                    <td><button class="btn btn-outline-info mr-3" routerLink="/detail/{{item.plan}}">Details</button>
-                    <button class="btn btn-outline-secondary mr-3">Edit</button>
+                    <button class="btn btn-outline-secondary mr-3" routerLink="/edit/{{item.plan}}">Edit</button>
                     <button class="btn btn-outline-danger mr-3"(click)="deteleDetails(item.plan)">Delete</button></td>
                     
                </tr>

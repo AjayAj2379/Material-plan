@@ -24,7 +24,8 @@ children:[
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
   {path:'list',component:DetailsComponent},
-  {path:'detail/:id',component:DetailIdComponent}
+  {path:'detail/:id',component:DetailIdComponent},
+  {path:'edit/:id',component:EditComponent}
 ]},
   {path:'**', component:PageNotFoundComponent}
   

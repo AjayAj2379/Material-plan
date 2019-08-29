@@ -1,5 +1,126 @@
-<div class="container">
+<br><div class="container">
+        <div class="text-center form-group" style="color: red;font-size: 20px">
+                   
+                <b><i>EDIT VALUES</i></b>
+            
+        </div>
     <div class="jumbotron">
         
+        <div *ngIf="!loading" class="row">
+            <div class="col-md-6">
+                    <h2><b>PLANNED</b></h2><hr>
+
+                    <div class="row">
+                            <div class="form-group form-inline">
+                                    <label for="plan" class="mr-4"><b>Plan ID<span style="color: red">*</span></b></label>
+                                    <input type="text" name="plan" id="plan" [(ngModel)]="editItem.plan" class="form-control" readonly >
+                            </div>
+                    </div>
+                    <div class="row">
+                            <div class="form-group form-inline">
+                                    <label for="sec" class="mr-4"><b>Section<span style="color: red">*</span></b></label>
+                                    <input type="text" name="sec" id="sec" [(ngModel)]="editItem.section" class="form-control">
+                                   
+                            </div>
+                    </div>
+                    
+                    <div class="add-after">
+                            <div class="row original-item"  *ngFor="let info of editItem.items; let i=index">
+                           
+                                    <div *ngIf="info.planQty!=0 && i!=planIndex" class="form-group form-inline">
+                                           <label for="len" class="mr-4"><b>Length</b></label>
+                                           <input type="number" name="len" id="len" class="form-control col-md-2 mr-3 edit-plan-len" [(ngModel)]="info.length">
+                                          
+                                           <label for="planed" class="mr-3"><b>Plan Qty</b></label>
+                                           <input type="number" name="planed" id="planned" class="form-control col-md-2 mr-4 edit-plan-qty" [(ngModel)]="info.planQty">
+                                           <button class="btn btn-outline-primary mr-2"   type="button" id="editremove" ><b>-</b></button>
+                                             
+                                        
+                                    </div>
+                                    <div *ngIf="info.planQty!=0 && i==planIndex" class="form-group form-inline">
+                                            <label for="len" class="mr-4"><b>Length<span style="color: red">*</span></b></label>
+                                            <input type="number" name="len" id="len-req" class="form-control col-md-2 mr-3 edit-plan-len" [(ngModel)]="info.length">
+                                            <label for="planed" class="mr-3"><b>Plan Qty<span style="color: red">*</span></b></label>
+                                           <input type="number" name="planed" id="planned-req" class="form-control col-md-2 mr-4 edit-plan-qty" [(ngModel)]="info.planQty">
+                                           <!-- <button class="btn btn-outline-primary mr-2"   type="button" id="editremovenone"><b>-</b></button> -->
+                                           <button type="button" class="btn btn-primary" id="editAdd">+</button>
+
+                                    </div>
+                                   
+
+                            </div>
+                        </div>
+                            <div class="append-item"></div>
+
+                
+                   
+                            
+
+                    
+                   
+
+            </div>
+            <div class="col-md-6">
+                    <h2><b>ACTUAL</b></h2><hr>
+                        <div class="add-after-act">
+                    <div class="row original-act-item" *ngFor="let info of editItem.items; let i=index">
+
+                            <div *ngIf="info.actQty!=0 && i!=actIndex" class="form-group form-inline ">
+
+                                    <label for="actlen" class="mr-4"><b>Length</b></label>
+                                    <input type="number" name="actlen" id="act-len" class="form-control col-md-2 mr-3 edit-act-len" [(ngModel)]="info.length">
+                                 <label for="act" class="mr-3"><b>ActQty</b></label>
+                                <input type="number" name="act" id="act" class="form-control col-md-2 mr-3 edit-act-qty" [(ngModel)]="info.actQty">
+                                <button class="btn btn-outline-dark mr-2"   type="button" id="acteditremove"><b>-</b></button>
+
+                            </div>
+
+                            <div *ngIf="info.actQty!=0 && i==actIndex" class="form-group form-inline">
+
+                                    <label for="actlen" class="mr-4"><b>Length<span style="color: red">*</span></b></label>
+                                    <input type="number" name="actlen" id="act-len-req" class="form-control col-md-2 mr-3 edit-act-len" [(ngModel)]="info.length">
+                                 <label for="act" class="mr-3"><b>ActQty<span style="color: red">*</span></b></label>
+                                <input type="number" name="act" id="act-req" class="form-control col-md-2 mr-3 edit-act-qty" [(ngModel)]="info.actQty">
+                                <!-- <button class="btn btn-outline-dark mr-2"   type="button" id="acteditremovenone"><b>-</b></button> -->
+                                <button type="button" class="btn btn-dark" id="act-edit-Add">+</button>
+
+                            </div>
+                           
+
+                    </div>
+                </div>
+                    <div class="act-append-item"></div>
+
+            </div>
+
+        </div>
+<br><br>
+        <div *ngIf="!loading" class="text-center form-group">
+                <button class="btn btn-success mr-5"  type="button" id="save">SaveChanges</button>
+                <button class="btn btn-info" type="button" routerLink="/detail/{{editItem.plan}}">Detail</button>
+               
+            </div>
+
+            <div *ngIf="loading" class="text-center">
+              
+                    <img src="https://loading.io/spinners/balls/index.circle-slack-loading-icon.gif" 
+                       
+                        alt="Loading...."
+                        class="rounded"
+                        >
+                        <b>Loading...</b>
+                     </div>
     </div>
 </div>
+ 
+
+<!-- <div class="row edit-add-act">
+<div class="form-group form-inline">
+        <label for="actlen" class="mr-4"><b>Length</b></label>
+        <input type="number" name="actlen" id="act-len" class="form-control col-md-2 mr-3" >
+       
+        <label for="act" class="mr-3"><b>ActQty</b></label>
+        <input type="number" name="act" id="act" class="form-control col-md-2 mr-4">
+        <button class="btn btn-info mr-2" type="button" id="dyn-act-editremove"><b>-</b></button>
+</div>
+</div> -->

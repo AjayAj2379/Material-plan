@@ -51,7 +51,7 @@ finalItem : InsertItem;
               <label for="planQty" class="mr-3"><b>Quantity</b></label>
               <input type="number" name="planQty" id="" class="form-control col-md-2 mr-2 planQty inputNum">
               <button class="btn btn-info mr-2"   type="button" id="remove"><b>-</b></button>
-              <button class="btn btn-info"  type="button" id="addbutton"><b>+</b></button>
+             
               </div>
                   </div>`;
       var actualAdd =`<div class="row act-add-item">
@@ -61,7 +61,7 @@ finalItem : InsertItem;
                     <label for="ActplanQty" class="mr-3"><b>Quantity</b></label>
                     <input type="number" name="ActplanQty" id="" class="form-control col-md-2 mr-2 ActplanQty inputNum">
                     <button class="btn btn-dark mr-2"  type="button" id="actremove"><b>-</b></button>
-                    <button class="btn btn-dark"  type="button" id="actaddbutton"><b>+</b></button>
+                  
                     </div>
                       </div>`
       
@@ -100,20 +100,20 @@ finalItem : InsertItem;
 
        // ADD
 
-       $(document).on('click','#addbutton',function(){
+      //  $(document).on('click','#addbutton',function(){
     
-        $(".lenQty").append(add);
-        $(".inputNum").addClass("remove-arrow");
+        
+      //   // $(".inputNum").addClass("remove-arrow");
       
      
         
-       });
-       $(document).on('click','#actaddbutton',function(){
+      //  });
+      //  $(document).on('click','#actaddbutton',function(){
     
-        $(".actLenQty").append(actualAdd);
-        $(".inputNum").addClass("remove-arrow")
-       });
-       //
+       
+      //   // $(".inputNum").addClass("remove-arrow")
+      //  });
+      //  //
     
      $("#planLen,#planQty,#ActplanLen,#ActplanQty").on('input',function(){
 
@@ -212,7 +212,7 @@ finalItem : InsertItem;
 
                  // add the removed div
       
-                 $(".plan-len-qty").after("<div class=\"lenQty form-group\"> </div>")
+                 $(".plan-len-qty").after("<div  class=\"lenQty form-group\"> </div>")
                  $(".act-len-qty").after("<div class=\"actLenQty form-group\"> </div>")
              
             }

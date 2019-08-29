@@ -9,3 +9,8 @@ input.ng-touched.ng-invalid {
     border-color: red;
 
 }
+.edited.remove-arrows::-webkit-inner-spin-button,
+.edited.remove-arrows::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

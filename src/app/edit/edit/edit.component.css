@@ -1,0 +1,13 @@
+input[readonly] {
+    background-color:white;
+border: 10px;
+
+    box-shadow: white
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+

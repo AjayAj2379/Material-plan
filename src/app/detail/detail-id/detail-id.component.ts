@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ServiceService} from '../../service/service.service'
 import { InsertItem } from 'src/app/details.model';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-detail-id',
@@ -17,7 +18,8 @@ export class DetailIdComponent implements OnInit {
   
 
   constructor(private route:ActivatedRoute,
-    private service:ServiceService) { }
+    private service:ServiceService,
+    private router:Router) { }
 
   ngOnInit() {
     this.loading = true;
@@ -54,6 +56,8 @@ export class DetailIdComponent implements OnInit {
   {
     console.log(id);
     this.service.confirmDelete(id)
+   
+
  
   }
 
