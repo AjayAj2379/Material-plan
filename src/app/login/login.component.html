@@ -1,17 +1,24 @@
-<div class="container">
+<br><br><br><div class="container">
+        <div class="text-center form-group" style="color:mediumvioletred;font-size: 20px">
+                   
+                <b><i>Enter the Details to Login</i></b>
+            
+        </div>
     <div class="jumbotron">
-        <div class="row">
+        <div class="row form-group">
             <div class="col-md-6">
                 <label for="email"><b>Email-ID<span style="color: red">*</span></b></label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control" #email id="email">
             </div>
         </div>
 
-        <div class="row">
+        <div class="row form-group">
                 <div class="col-md-6">
                     <label for="password"><b>Password<span style="color: red">*</span></b></label>
-                    <input type="password" class="form-control" id="pass">
+                    <input type="password" class="form-control" #pass id="pass">
                 </div>
             </div>
+
+            <button class="btn btn-primary" (click)="login(email.value,pass.value)">Login</button>
     </div>
 </div>

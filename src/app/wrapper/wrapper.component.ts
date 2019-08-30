@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceService } from '../service/service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wrapper',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WrapperComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:ServiceService, private route:Router) { }
 
   ngOnInit() {
+    if(!this.service.user)
+    {
+      this.route.navigate(['/'])
+    }
   }
 
 }

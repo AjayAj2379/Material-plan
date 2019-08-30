@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router"
+import {ActivatedRoute, Router} from "@angular/router"
 import { ServiceService } from 'src/app/service/service.service';
 import { InsertItem, PlannedDetails, ActualDetails, CombinedDetails } from 'src/app/details.model';
 import Swal from 'sweetalert2';
@@ -26,10 +26,14 @@ saveItem:InsertItem[];
   combinedItem : CombinedDetails[]=[];
   section;
   plan;
-  constructor(private route: ActivatedRoute, private service:ServiceService, private firestore:AngularFirestore) { }
+  constructor(private route: ActivatedRoute, private service:ServiceService, private firestore:AngularFirestore,
+    private router:Router) { }
 
   ngOnInit() {
-
+    if(!this.service.user)
+    {
+      this.router.navigate(['/'])
+    }
     let refer=this;
     this.loading=true;
     this.route.params.subscribe((data:any)=>{

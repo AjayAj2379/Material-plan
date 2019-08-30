@@ -4,6 +4,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {ServiceService} from '../service/service.service'
 import {NgForm, SelectControlValueAccessor} from '@angular/forms';
 import Swal from 'sweetalert2'
+import {Router} from '@angular/router'
 declare var $: any;
 
 
@@ -28,13 +29,17 @@ finalItem : InsertItem;
   getItem: any;
   idexist: boolean;
   constructor(private fireStore : AngularFirestore,
-    private service : ServiceService) { 
+    private service : ServiceService, private route:Router) { 
  
  
   }
 
   ngOnInit() {
   
+    if(!this.service.user)
+    {
+      this.route.navigate(['/'])
+    }
   this.resetForm()
     let refer = this;
   
