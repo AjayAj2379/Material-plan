@@ -20,7 +20,6 @@ plannedSize: number;
 actualSize:number;
 section : string;
 plan: string='';
-buttonActivate= true;
 planArray=[];
 jquery;
 
@@ -98,38 +97,6 @@ finalItem : InsertItem;
         $(this).closest(".act-add-item").remove();
        });
 
-       // ADD
-
-      //  $(document).on('click','#addbutton',function(){
-    
-        
-      //   // $(".inputNum").addClass("remove-arrow");
-      
-     
-        
-      //  });
-      //  $(document).on('click','#actaddbutton',function(){
-    
-       
-      //   // $(".inputNum").addClass("remove-arrow")
-      //  });
-      //  //
-    
-     $("#planLen,#planQty,#ActplanLen,#ActplanQty").on('input',function(){
-
-    len= $("#planLen").val();
-     qty= $("#planQty").val();
-     actLen= $("#ActplanLen").val();
-     actQty= $("#ActplanQty").val()
-
-     if(len==''|| qty==''||actLen==''||actQty=='')
-     {
-          refer.buttonActivate=true;
-     }
-     else{
-       refer.buttonActivate=false;
-     }
-     })
      
      
 
@@ -137,6 +104,20 @@ finalItem : InsertItem;
 
        $(document).on('click','#submit',function(){
         var confirm;
+        len= $("#planLen").val();
+        qty= $("#planQty").val();
+       actLen= $("#ActplanLen").val();
+        actQty= $("#ActplanQty").val()
+        if(len==''|| qty==''||actLen==''||actQty==''|| refer.plan==''|| refer.section=='')
+        {
+          Swal.fire({
+            title:'Fill mandatory field',
+            text:'Please provide values to required field',
+            type:"error",
+            showConfirmButton:true
+          })
+        }
+        else{
         
        refer.checkIdExist();
        setTimeout(()=>{
@@ -208,7 +189,7 @@ finalItem : InsertItem;
                  $("#ActplanQty").val('')
                  $("#planName").val('');
                  $("#section").val('');
-                 refer.buttonActivate=true;
+                
 
                  // add the removed div
       
@@ -225,7 +206,7 @@ finalItem : InsertItem;
 
        },100)
           
-           
+        }
       
     
         });

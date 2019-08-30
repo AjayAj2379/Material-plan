@@ -32,8 +32,8 @@ saveItem:InsertItem[];
 
     let refer=this;
     this.loading=true;
-    this.route.pathFromRoot[2].params.subscribe((data:any)=>{
-    console.log(data.id)
+    this.route.params.subscribe((data:any)=>{
+    console.log(data)
     this.plan=data.id
     this.service.getDetailsByID(data.id).subscribe((detail:any)=>{
       console.log(detail.items.length)

@@ -13,7 +13,7 @@
            <tbody *ngIf="getItem!=0"  class="table-info">
                <tr *ngFor="let item of getItem; let i=index" >
                    <td><b>{{i+1}}</b></td>
-                   <td><b>{{item.plan}}</b></td>
+                   <td><b><span style="color:orangered">{{item.plan |uppercase}}</span></b></td>
                    <td><b>{{item.section}}</b></td>
                    <td><button class="btn btn-outline-info mr-3" routerLink="/detail/{{item.plan}}">Details</button>
                     <button class="btn btn-outline-secondary mr-3" routerLink="/edit/{{item.plan}}">Edit</button>

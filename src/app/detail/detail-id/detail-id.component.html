@@ -15,7 +15,7 @@
             <tbody *ngIf="materialDetails!=0  " class="table-success">
                 
                 <tr>    
-                    <td><b><b>{{materialDetails.plan}}</b></b></td>
+                    <td><b><span style="color:#3500ff">{{materialDetails.plan | uppercase}}</span></b></td>
                     <td><b>{{materialDetails.section}}</b></td>
                     <td>
                         <div *ngFor = "let info of materialDetails.items"><td *ngIf="info.length!=0"><b>{{info.length}}</b></td></div>

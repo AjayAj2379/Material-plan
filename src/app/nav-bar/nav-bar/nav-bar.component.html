@@ -18,8 +18,8 @@
             </ul>
         </div>
         <div class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-info" type="button" id="search">Search</button>
+            <input class="form-control mr-sm-2" id="searchfield" type="search" #search placeholder="Search" aria-label="Search">
+            <button class="btn btn-info" type="button" id="search" (click)="Onsearch(search.value)">Search</button>
         </div>
     </div>
     

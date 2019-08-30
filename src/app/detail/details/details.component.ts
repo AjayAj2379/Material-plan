@@ -24,7 +24,7 @@ export class DetailsComponent implements OnInit {
       this.planArray=[];
       this.getItem = data.map(info =>{
         
-        this.planArray.push(info.payload.doc.data().plan);
+       // this.planArray.push(info.payload.doc.data().plan);
         
         return info.payload.doc.data()
        

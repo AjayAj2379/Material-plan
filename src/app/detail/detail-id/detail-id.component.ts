@@ -27,8 +27,7 @@ export class DetailIdComponent implements OnInit {
     console.log(this.materialDetails.length)
     console.log(this.loading)
     console.log(this.route.pathFromRoot);
-    this.route.pathFromRoot[2].params.subscribe((data:any)=>{
-
+    this.route.params.subscribe((data:any)=>{
       console.log(data.id);
       this.service.getDetailsByID(data.id).subscribe((detail:any)=>{
         if(typeof detail == "undefined")
