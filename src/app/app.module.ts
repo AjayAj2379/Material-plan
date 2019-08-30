@@ -7,6 +7,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage'
 import {AngularFirestoreModule} from '@angular/fire/firestore'
 import {AngularFireAuthModule} from '@angular/fire/auth'
 
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { environment } from 'src/environments/environment';
@@ -15,20 +16,30 @@ import { DetailIdComponent } from './detail/detail-id/detail-id.component';
 import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
 import { PageNotFoundComponent } from './error/page-not-found/page-not-found.component';
 import { EditComponent } from './edit/edit/edit.component';
+import { LoginComponent } from './login/login.component';
+import { WrapperComponent } from './wrapper/wrapper.component';
 
 const route : Routes =[
 
-  {path:'',component:NavBarComponent,
+//   {path:'',component:NavBarComponent,
   
-children:[
-  {path:'',component:HomeComponent},
-  {path:'home',component:HomeComponent},
+// children:[
+//   {path:'',component:HomeComponent},
+//   {path:'home',component:HomeComponent},
+//   {path:'list',component:DetailsComponent},
+//   {path:'detail/:id',component:DetailIdComponent},
+//   {path:'edit/:id',component:EditComponent}
+// ]},
+//   {path:'**', component:PageNotFoundComponent}
+  {path:'',component:LoginComponent},
+  {path:'main',component:WrapperComponent,children:[
+
+    {path:'',component:HomeComponent},
+    {path:'home',component:HomeComponent},
   {path:'list',component:DetailsComponent},
   {path:'detail/:id',component:DetailIdComponent},
   {path:'edit/:id',component:EditComponent}
-]},
-  {path:'**', component:PageNotFoundComponent}
-  
+  ]}
   
 ];
 
@@ -40,7 +51,9 @@ children:[
     DetailIdComponent,
     NavBarComponent,
     PageNotFoundComponent,
-    EditComponent
+    EditComponent,
+    LoginComponent,
+    WrapperComponent
   ],
   imports: [
     BrowserModule,

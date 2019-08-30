@@ -15,8 +15,8 @@
                    <td><b>{{i+1}}</b></td>
                    <td><b><span style="color:orangered">{{item.plan |uppercase}}</span></b></td>
                    <td><b>{{item.section}}</b></td>
-                   <td><button class="btn btn-outline-info mr-3" routerLink="/detail/{{item.plan}}">Details</button>
-                    <button class="btn btn-outline-secondary mr-3" routerLink="/edit/{{item.plan}}">Edit</button>
+                   <td><button class="btn btn-outline-info mr-3" routerLink="/main/detail/{{item.plan}}">Details</button>
+                    <button class="btn btn-outline-secondary mr-3" routerLink="/main/edit/{{item.plan}}">Edit</button>
                     <button class="btn btn-outline-danger mr-3"(click)="deteleDetails(item.plan)">Delete</button></td>
                     
                </tr>
