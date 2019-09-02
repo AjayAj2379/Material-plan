@@ -26,6 +26,7 @@ export class DetailsComponent implements OnInit {
     // }
     this.loading = true;
     this.service.getDetails().subscribe((data:any)=>{
+      console.log(data)
       this.planArray=[];
       this.getItem = data.map(info =>{
         
@@ -37,7 +38,7 @@ export class DetailsComponent implements OnInit {
       this.loading = false;
       console.log(this.getItem)
       console.log(this.planArray)
-    });
+    })
 
    
    

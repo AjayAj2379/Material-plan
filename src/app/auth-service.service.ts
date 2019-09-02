@@ -23,10 +23,12 @@ export class AuthServiceService {
       
 
     }).catch((error:any)=>{
+      console.log(error)
+      
       Swal.fire({
       
-        title:'Invalid Details',
-        text:"Please provide valid details",
+        title:error.message,
+        text:error.code,
         type:"error",
         showCloseButton:true
       })
