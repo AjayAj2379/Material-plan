@@ -44,12 +44,27 @@ export class NavBarComponent implements OnInit {
 
     });
 
+
+
   }
 
   Onsearch(value)
   {
     console.log(value)
-    this.route.navigate(['/main/detail/'+value])
+    if(value=='')
+    {
+      Swal.fire({
+
+        title:"This field is required",
+        text:"Please fill the field",
+        type:"error",
+        showConfirmButton:true
+      })
+    }
+    else{
+      this.route.navigate(['/main/detail/'+value])
+    }
+    
   }
 
   logout()

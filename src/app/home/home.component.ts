@@ -115,6 +115,7 @@ finalItem : InsertItem;
         actQty= $("#ActplanQty").val()
         if(len==''|| qty==''||actLen==''||actQty==''|| refer.plan==''|| refer.section=='')
         {
+          console.log(len,qty,actLen,actQty,refer.plan,refer.section)
           Swal.fire({
             title:'Fill mandatory field',
             text:'Please provide values to required field',

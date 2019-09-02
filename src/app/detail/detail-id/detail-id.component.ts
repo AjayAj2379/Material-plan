@@ -43,6 +43,7 @@ export class DetailIdComponent implements OnInit {
         else
         {
           this.materialDetails=detail;
+          this.empty=false;
          
         }
         this.loading=false;
