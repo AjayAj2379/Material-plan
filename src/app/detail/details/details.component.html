@@ -10,7 +10,7 @@
                </tr>
            </thead>
            <br>
-           <tbody *ngIf="getItem!=0"  class="table-info">
+           <tbody *ngIf="getItem.length!=0"  class="table-info">
                <tr *ngFor="let item of getItem; let i=index" >
                    <td><b>{{i+1}}</b></td>
                    <td><b><span style="color:orangered">{{item.plan |uppercase}}</span></b></td>
@@ -28,7 +28,7 @@
        
         </table>
          
-            <div *ngIf="getItem==0 && !loading" class="text-center">
+            <div *ngIf="getItem.length==0 && !loading" class="text-center">
                <b>No records found or Check your Network</b>
             </div>
         <div *ngIf="loading" class="text-center">

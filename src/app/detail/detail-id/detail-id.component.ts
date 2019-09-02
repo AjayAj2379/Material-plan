@@ -11,7 +11,7 @@ import {Router} from '@angular/router'
 })
 export class DetailIdComponent implements OnInit {
 
-  materialDetails: InsertItem[]=[];
+  materialDetails: InsertItem[]=[{plan:'',section:'',items:''}];
   loading: boolean;
   empty=false;
  
@@ -37,7 +37,7 @@ export class DetailIdComponent implements OnInit {
         if(typeof detail == "undefined")
         {
          
-          this.materialDetails = [];
+          this.materialDetails = [{plan:'',section:'',items:''}];
           this.empty= true;
         }
         else

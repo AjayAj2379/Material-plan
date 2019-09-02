@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
 
-  getItem:InsertItem[]=[];
+  getItem:any[]=[];
   planArray=[];
   serialNo=1;
   loading: boolean;
@@ -34,8 +34,10 @@ export class DetailsComponent implements OnInit {
         
         return info.payload.doc.data()
        
+       
       })
       this.loading = false;
+      console.log(this.getItem.length)
       console.log(this.getItem)
       console.log(this.planArray)
     })

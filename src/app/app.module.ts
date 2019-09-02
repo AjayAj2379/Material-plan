@@ -61,7 +61,7 @@ const route : Routes =[
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase,'Material-Plan'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
