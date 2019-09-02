@@ -403,6 +403,7 @@ setValue(check)
               })
 
     }).catch(() => {
+      console.log("no intenet")
       Swal.fire({
         title:'Offline!!',
         text:'Check your Internet Connection',
