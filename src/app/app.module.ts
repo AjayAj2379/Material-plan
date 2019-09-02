@@ -65,7 +65,7 @@ const route : Routes =[
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(route,{useHash:true}),
+    RouterModule.forRoot(route),
     AngularFireAuthGuardModule 
   ],
   providers: [],
