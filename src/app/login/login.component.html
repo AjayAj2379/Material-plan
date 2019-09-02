@@ -5,20 +5,57 @@
             
         </div>
     <div class="jumbotron" style="background-color:skyblue">
-        <div class="row form-group">
+        <div class="form-group">
             <div class="col-md-6">
                 <label for="email"><b>Email-ID<span style="color: red">*</span></b></label>
-                <input type="email" class="form-control" #email id="email">
+                <input type="email" class="input-field form-control" #email id="email" placeholder="xxxx@zzz.com">
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="form-group">
                 <div class="col-md-6">
                     <label for="password"><b>Password<span style="color: red">*</span></b></label>
-                    <input type="password" class="form-control" #pass id="pass">
+                    
+                        <input class="input-field form-control" type="{{inputtype}}"
+                               placeholder="Password" #pass> 
+                        
+                     
+                
                 </div>
             </div>
 
-            <button class="btn btn-primary" (click)="login(email.value,pass.value)">Login</button>
+            <div class="form-check">
+                <div class="col-md-6">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1" (click)="onclick()" >
+                        <label class="form-check-label" for="gridCheck1">
+                        <b><i>Show Password</i></b>
+                        </label>
+
+                </div>
+                   
+            </div>
+            <br>
+          
+
+            <div class="text-center">
+                <div class="col-md-6">
+                        <button class="btn btn-primary" (click)="login(email.value,pass.value)">Login</button>
+                </div>
+                
+            </div><br>
+
+            <div *ngIf="loading" class="text-center">
+                <div class="col-md-6">
+                        <img src="https://loading.io/spinners/balls/index.circle-slack-loading-icon.gif" 
+                       
+                        alt="Logging In.."
+                        class="rounded"
+                        >
+                        <b>Logging In...</b>
+                </div>
+              
+                   
+                     </div>
+           
     </div>
 </div>

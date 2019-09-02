@@ -12,10 +12,10 @@ export class WrapperComponent implements OnInit {
   constructor(private service:ServiceService, private route:Router) { }
 
   ngOnInit() {
-    if(!this.service.user)
-    {
-      this.route.navigate(['/'])
-    }
+    // if(!this.service.user)
+    // {
+    //   this.route.navigate(['/'])
+    // }
   }
 
 }

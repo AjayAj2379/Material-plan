@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth'
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router'
+import {Router, ResolveEnd} from '@angular/router'
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,24 +29,53 @@ export class ServiceService {
     return this. firestore.collection('details').doc(id).valueChanges();
   }
 
-  login(email,pass)
-  {
-    return this.fireauth.auth.signInWithEmailAndPassword(email,pass).then(()=>{
+  // login(email,pass)
+  // {
+    
+  //   return this.fireauth.auth.signInWithEmailAndPassword(email,pass).then(()=>{
 
-      this.user=true,
-      this.route.navigate(['/main'])
+  //     this.user=true,
+  //     this.route.navigate(['/main'])
 
-    }).catch((error:any)=>{
-      Swal.fire({
+  //   }).catch((error:any)=>{
+  //     Swal.fire({
       
-        title:'Invalid Details',
-        text:"Please provide valid details",
-        type:"error",
-        showCloseButton:true
-      })
+  //       title:'Invalid Details',
+  //       text:"Please provide valid details",
+  //       type:"error",
+  //       showCloseButton:true
+  //     })
       
-            })
-  }
+  //           })
+
+
+          
+  // }
+
+  // isLogged()
+  // {
+  //   const promise = new Promise(
+  //     (resolve,reject)=>{
+
+  //       this.fireauth.authState.subscribe((data:any)=>{
+  //           console.log(data)
+  //       if(data)
+  //       {
+         
+  //      resolve(this.user)
+         
+  //       }
+  //       else
+  //       {
+  //         reject(this.user)
+  //         console.log(this.user)
+  //       }
+  //       })
+  //     }
+      
+  //     );
+  //     return promise;
+  // }
 
   confirmDelete(id)
   {

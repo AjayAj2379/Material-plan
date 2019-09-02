@@ -4,6 +4,7 @@ import { ServiceService } from 'src/app/service/service.service';
 import {Router} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
 import Swal from 'sweetalert2'
+import { AuthServiceService } from 'src/app/auth-service.service';
 declare var $:any;
 
 @Component({
@@ -14,7 +15,7 @@ declare var $:any;
 export class NavBarComponent implements OnInit {
 
   planArray=[];
-  constructor(private firestore:AngularFirestore, private service:ServiceService,
+  constructor(private firestore:AngularFirestore, private authservice:AuthServiceService,
     private route:Router, private fireauth:AngularFireAuth  ) { }
 
   ngOnInit() {  
@@ -48,26 +49,12 @@ export class NavBarComponent implements OnInit {
   Onsearch(value)
   {
     console.log(value)
-    this.route.navigate(['/detail/'+value])
+    this.route.navigate(['/main/detail/'+value])
   }
 
   logout()
   {
-    console.log(this.service.user)
-this.fireauth.auth.signOut().then((data)=>{
-//console.log(data)
-  Swal.fire({
-
-    title:"Logged out",
-    text:"You are logged out successfully",
-    type:"success",
-    timer:1000
-  })
-  this.service.user=false;
-  console.log(this.service.user)
-  this.route.navigate(['/'])
-
-})
-
+    
+      this.authservice.logout();
   }
 }

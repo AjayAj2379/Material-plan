@@ -20,10 +20,10 @@ export class DetailsComponent implements OnInit {
     private firestore: AngularFirestore,private route:Router ) { }
 
   ngOnInit() {
-    if(!this.service.user)
-    {
-      this.route.navigate(['/'])
-    }
+    // if(!this.service.user)
+    // {
+    //   this.route.navigate(['/'])
+    // }
     this.loading = true;
     this.service.getDetails().subscribe((data:any)=>{
       this.planArray=[];

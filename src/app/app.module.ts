@@ -6,6 +6,7 @@ import {AngularFireModule} from '@angular/fire'
 import {AngularFireStorageModule} from '@angular/fire/storage'
 import {AngularFirestoreModule} from '@angular/fire/firestore'
 import {AngularFireAuthModule} from '@angular/fire/auth'
+import {AngularFireAuthGuardModule} from '@angular/fire/auth-guard'
 
 
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { PageNotFoundComponent } from './error/page-not-found/page-not-found.com
 import { EditComponent } from './edit/edit/edit.component';
 import { LoginComponent } from './login/login.component';
 import { WrapperComponent } from './wrapper/wrapper.component';
+import { AuthGuard } from './auth-guard.service';
 
 const route : Routes =[
 
@@ -32,14 +34,15 @@ const route : Routes =[
 // ]},
 //   {path:'**', component:PageNotFoundComponent}
   {path:'',component:LoginComponent},
-  {path:'main',component:WrapperComponent,children:[
+  {path:'main',component:WrapperComponent,canActivate:[AuthGuard] ,children:[
 
-    {path:'',component:HomeComponent},
+    {path:'',component:HomeComponent,},
     {path:'home',component:HomeComponent},
   {path:'list',component:DetailsComponent},
   {path:'detail/:id',component:DetailIdComponent},
   {path:'edit/:id',component:EditComponent}
-  ]}
+  ]},
+  {path:'**', component:PageNotFoundComponent}
   
 ];
 
@@ -62,7 +65,8 @@ const route : Routes =[
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(route) 
+    RouterModule.forRoot(route,{useHash:true}),
+    AngularFireAuthGuardModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

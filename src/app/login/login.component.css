@@ -1,0 +1,30 @@
+.input-icons i { 
+            position: absolute; 
+        } 
+          
+        .input-icons { 
+            width: 100%; 
+            margin-bottom: 10px; 
+        } 
+          
+        .icon { 
+            padding: 10px; 
+            color: green; 
+            min-width: 850px; 
+            text-align: center; 
+        } 
+          
+        .input-field { 
+            width: 100%; 
+            padding: 10px; 
+            
+        } 
+
+
+.jumbotron{
+
+    background-image: url('../../assets/OSXKQZ0.jpg');
+    background-size: cover;
+    height:550px
+    
+}

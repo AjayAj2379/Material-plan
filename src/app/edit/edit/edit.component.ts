@@ -30,10 +30,10 @@ saveItem:InsertItem[];
     private router:Router) { }
 
   ngOnInit() {
-    if(!this.service.user)
-    {
-      this.router.navigate(['/'])
-    }
+    // if(!this.service.user)
+    // {
+    //   this.router.navigate(['/'])
+    // }
     let refer=this;
     this.loading=true;
     this.route.params.subscribe((data:any)=>{

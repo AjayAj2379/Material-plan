@@ -5,6 +5,8 @@ import {ServiceService} from '../service/service.service'
 import {NgForm, SelectControlValueAccessor} from '@angular/forms';
 import Swal from 'sweetalert2'
 import {Router} from '@angular/router'
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthServiceService } from '../auth-service.service';
 declare var $: any;
 
 
@@ -28,20 +30,18 @@ combinedItem : CombinedDetails[]=[];
 finalItem : InsertItem;
   getItem: any;
   idexist: boolean;
-  constructor(private fireStore : AngularFirestore,
-    private service : ServiceService, private route:Router) { 
+  constructor(private fireStore : AngularFirestore, private authservice:AuthServiceService,
+    private service : ServiceService, private route:Router,private fireauth:AngularFireAuth) { 
  
  
   }
 
   ngOnInit() {
-  
-    if(!this.service.user)
-    {
-      this.route.navigate(['/'])
-    }
+
+
+   
   this.resetForm()
-    let refer = this;
+    let refer = this
   
     $(document).ready (function(){
       var len,qty,actLen,actQty;

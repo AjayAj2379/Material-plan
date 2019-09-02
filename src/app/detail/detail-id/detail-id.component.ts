@@ -22,10 +22,10 @@ export class DetailIdComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit() {
-    if(!this.service.user)
-    {
-      this.router.navigate(['/'])
-    }
+    // if(!this.service.user)
+    // {
+    //   this.router.navigate(['/'])
+    // }
     this.loading = true;
   
     console.log(this.materialDetails.length)
