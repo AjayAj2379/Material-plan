@@ -11,9 +11,12 @@ import {Router} from '@angular/router'
 })
 export class DetailIdComponent implements OnInit {
 
-  materialDetails: InsertItem[]=[{plan:'',section:'',items:''}];
+  materialDetails: InsertItem[]=[];
   loading: boolean;
   empty=false;
+  plan;
+  section;
+  items;
  
   
 
@@ -37,11 +40,15 @@ export class DetailIdComponent implements OnInit {
         if(typeof detail == "undefined")
         {
          
-          this.materialDetails = [{plan:'',section:'',items:''}];
+          this.materialDetails = [];
           this.empty= true;
         }
         else
         {
+          console.log(detail)
+          this.plan=detail.plan;
+          this.section=detail.section;
+          this.items=detail.items
           this.materialDetails=detail;
           this.empty=false;
          

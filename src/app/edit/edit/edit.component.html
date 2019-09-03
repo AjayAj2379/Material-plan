@@ -14,19 +14,19 @@
                     <div class="row">
                             <div class="form-group form-inline">
                                     <label for="plan" class="mr-4"><b>Plan ID<span style="color: red">*</span></b></label>
-                                    <input type="text" name="plan" id="plan" [(ngModel)]="editItem.plan" class="form-control" readonly >
+                                    <input type="text" name="plan" id="plan" [(ngModel)]="plan" class="form-control" readonly >
                             </div>
                     </div>
                     <div class="row">
                             <div class="form-group form-inline">
                                     <label for="sec" class="mr-4"><b>Section<span style="color: red">*</span></b></label>
-                                    <input type="text" name="sec" id="sec" [(ngModel)]="editItem.section" class="form-control">
+                                    <input type="text" name="sec" id="sec" [(ngModel)]="section" class="form-control">
                                    
                             </div>
                     </div>
                     
                     <div class="add-after">
-                            <div class="row original-item"  *ngFor="let info of editItem.items; let i=index">
+                            <div class="row original-item"  *ngFor="let info of items; let i=index">
                            
                                     <div *ngIf="info.planQty!=0 && i!=planIndex" class="form-group form-inline">
                                            <label for="len" class="mr-4"><b>Length</b></label>
@@ -64,7 +64,7 @@
             <div class="col-md-6">
                     <h2><b>ACTUAL</b></h2><hr>
                         <div class="add-after-act">
-                    <div class="row original-act-item" *ngFor="let info of editItem.items; let i=index">
+                    <div class="row original-act-item" *ngFor="let info of items; let i=index">
 
                             <div *ngIf="info.actQty!=0 && i!=actIndex" class="form-group form-inline ">
 
@@ -98,7 +98,7 @@
 <br><br>
         <div *ngIf="!loading" class="text-center form-group">
                 <button class="btn btn-success mr-5"  type="button" id="save">SaveChanges</button>
-                <button class="btn btn-info" type="button" routerLink="/main/detail/{{editItem.plan}}">Detail</button>
+                <button class="btn btn-info" type="button" routerLink="/main/detail/{{plan}}">Detail</button>
                
             </div>
 

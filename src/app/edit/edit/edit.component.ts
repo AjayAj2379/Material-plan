@@ -26,21 +26,21 @@ saveItem:InsertItem[];
   combinedItem : CombinedDetails[]=[];
   section;
   plan;
+  items;
   constructor(private route: ActivatedRoute, private service:ServiceService, private firestore:AngularFirestore,
     private router:Router) { }
 
   ngOnInit() {
-    // if(!this.service.user)
-    // {
-    //   this.router.navigate(['/'])
-    // }
+  
     let refer=this;
     this.loading=true;
     this.route.params.subscribe((data:any)=>{
     console.log(data)
     this.plan=data.id
     this.service.getDetailsByID(data.id).subscribe((detail:any)=>{
-      console.log(detail.items.length)
+      console.log(detail.section)
+      this.section=detail.section;
+      this.items=detail.items
       detail.items.forEach((element,index) => {
         if(element.actQty!=0)
         {

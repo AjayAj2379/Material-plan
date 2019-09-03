@@ -15,17 +15,17 @@
             <tbody *ngIf="materialDetails.length!=0" class="table-success">
                 
                 <tr>    
-                    <td><b><span style="color:#3500ff">{{materialDetails.plan | uppercase}}</span></b></td>
-                    <td><b>{{materialDetails.section}}</b></td>
+                    <td><b><span style="color:#3500ff">{{plan | uppercase}}</span></b></td>
+                    <td><b>{{section}}</b></td>
                     <td>
-                        <div *ngFor = "let info of materialDetails.items"><td *ngIf="info.length!=0"><b>{{info.length}}</b></td></div>
+                        <div *ngFor = "let info of items"><td *ngIf="info.length!=0"><b>{{info.length}}</b></td></div>
                     </td>
 
                     <td>
-                            <div *ngFor = "let info of materialDetails.items"><td *ngIf="info.length!=0"><b>{{info.actQty}}</b></td></div>
+                            <div *ngFor = "let info of items"><td *ngIf="info.length!=0"><b>{{info.actQty}}</b></td></div>
                     </td>
                     <td>
-                            <div *ngFor = "let info of materialDetails.items"><td  *ngIf="info.length!=0"><b>{{info.planQty}}</b></td></div>
+                            <div *ngFor = "let info of items"><td  *ngIf="info.length!=0"><b>{{info.planQty}}</b></td></div>
                     </td>
                     
                     
@@ -50,8 +50,8 @@
                  </div>
 
                  <div *ngIf="materialDetails.length!=0" class="text-center form-group">
-                        <button class="btn btn-info mr-5" routerLink="/main/edit/{{materialDetails.plan}}">Edit</button>
-                        <button class="btn btn-danger" (click)="onDelete(materialDetails.plan)" >Delete</button>
+                        <button class="btn btn-info mr-5" routerLink="/main/edit/{{plan}}">Edit</button>
+                        <button class="btn btn-danger" (click)="onDelete(plan)" >Delete</button>
                     </div>
               
     </div>
